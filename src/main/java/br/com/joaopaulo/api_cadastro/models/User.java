@@ -6,8 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -23,22 +21,15 @@ public class User {
     private Long id;
 
     @Column(name = "username",unique = true, nullable = false)
-    @NotBlank
-    @Size(min = 2, max = 100)
     private String username;
 
     @Column(name = "name")
-    @NotBlank
-    @Size(max = 100)
     private String name;
 
     @Column(name = "password")
-    @NotBlank(message = "Este campo não pode ser vazio")
-    @Size(min = 8, max = 60, message = "A senha deve ter mais de 8 digitos e menos 60")
     private String password;
 
     @Column(name = "users_emails")
-    @NotBlank
     private String email;
 
     public Long getId() {
