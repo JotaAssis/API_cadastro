@@ -56,6 +56,15 @@ public class UserService {
 
     //Metodo para remover
     public ResponseEntity<Response> remover(Long id){
+        if (id == null || id < 0) {
+            rm.setMensage("Id do produto invalido!");
+            return new ResponseEntity<Response>(rm, HttpStatus.BAD_REQUEST);
+        }
+        Optional<User> userOptional = uP.findById(id);
+        if (userOptional.isEmpty()) {
+            rm.setMensage("Usuário não encontrado!");
+            return new ResponseEntity<Response>(rm, HttpStatus.NOT_FOUND);
+        }
         uP.deleteById(id);
         rm.setMensage("Produto removido");
         return new ResponseEntity<Response>(rm, HttpStatus.OK);
