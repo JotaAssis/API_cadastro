@@ -20,9 +20,16 @@ public class UserService {
     private Response rm;
 
     //Metodo de cadastro
-    public ResponseEntity<User> cadastrar(User user){
-        User novoUser = uP.save(user);
-        return new ResponseEntity<User>(novoUser, HttpStatus.CREATED);
+    public ResponseEntity<?> cadastrar(User user){
+        if (user.getPassword().equals("") || user.getPassword().length() < 8){
+            rm.setMensage("A senha não pode ser nula e não pode ter menos que 8 caracteres");
+            return new ResponseEntity<Response>(rm, HttpStatus.BAD_REQUEST);
+        }if (user.getUsername().equals("") || user.getUsername().length() < 2) {
+            rm.setMensage("O usuário não pode ser nulo e não pode ter menos que 2 caracteres");
+            return new ResponseEntity<Response>(rm, HttpStatus.BAD_REQUEST);
+        }
+            User novoUser = uP.save(user);
+            return new ResponseEntity<User>(novoUser, HttpStatus.CREATED);       
     }
 
     //Metodo Listar

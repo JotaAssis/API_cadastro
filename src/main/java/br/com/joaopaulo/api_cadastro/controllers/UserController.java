@@ -24,7 +24,7 @@ public class UserController {
 
     //Cadastrar
     @PostMapping("/cadastro")
-    public ResponseEntity<User> cadastrar(@RequestBody User user){
+    public ResponseEntity<?> cadastrar(@RequestBody User user){
         return uService.cadastrar(user);
     }
 
