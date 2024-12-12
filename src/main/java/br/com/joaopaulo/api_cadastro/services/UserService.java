@@ -1,6 +1,8 @@
 package br.com.joaopaulo.api_cadastro.services;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +40,16 @@ public class UserService {
     }
 
     //Metodo para atualizar User
-    public ResponseEntity<User> atualizar(User user){
+    public ResponseEntity<?> atualizar(User user){
+        if (user.getId() == null || user.getId() < 0) {
+            rm.setMensage("Id do produto invalido!");
+            return new ResponseEntity<Response>(rm, HttpStatus.BAD_REQUEST);
+        }
+        Optional<User> userOptional = uP.findById(user.getId());
+        if (userOptional.isEmpty()) {
+            rm.setMensage("Usuário não encontrado!");
+            return new ResponseEntity<Response>(rm, HttpStatus.NOT_FOUND);
+        }
         User userAtualizado = uP.save(user);
         return new ResponseEntity<User>(userAtualizado, HttpStatus.OK);
     }

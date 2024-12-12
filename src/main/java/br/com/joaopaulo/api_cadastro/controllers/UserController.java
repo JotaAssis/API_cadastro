@@ -36,7 +36,7 @@ public class UserController {
 
     //Alterar
     @PutMapping("/alterar")
-    public ResponseEntity<User> atualizar(@RequestBody User user){
+    public ResponseEntity<?> atualizar(@RequestBody User user){
         return uService.atualizar(user);
     }
 
