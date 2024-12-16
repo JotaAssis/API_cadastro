@@ -42,7 +42,7 @@ public class UserService {
     //Metodo para atualizar User
     public ResponseEntity<?> atualizar(User user){
         if (user.getId() == null || user.getId() < 0) {
-            rm.setMensage("Id do produto invalido!");
+            rm.setMensage("Id do usuário invalido!");
             return new ResponseEntity<Response>(rm, HttpStatus.BAD_REQUEST);
         }
         Optional<User> userOptional = uP.findById(user.getId());
@@ -57,7 +57,7 @@ public class UserService {
     //Metodo para remover
     public ResponseEntity<Response> remover(Long id){
         if (id == null || id < 0) {
-            rm.setMensage("Id do produto invalido!");
+            rm.setMensage("Id do usuário invalido!");
             return new ResponseEntity<Response>(rm, HttpStatus.BAD_REQUEST);
         }
         Optional<User> userOptional = uP.findById(id);
@@ -66,7 +66,7 @@ public class UserService {
             return new ResponseEntity<Response>(rm, HttpStatus.NOT_FOUND);
         }
         uP.deleteById(id);
-        rm.setMensage("Produto removido");
+        rm.setMensage("Usuário removido");
         return new ResponseEntity<Response>(rm, HttpStatus.OK);
     }
 
